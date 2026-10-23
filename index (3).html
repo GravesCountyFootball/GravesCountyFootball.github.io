@@ -1,0 +1,67 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graves County Football Records</title>
+<meta name="description" content="Every Season. Every Game. Every Player. The Coach Doc Oliver Football Record Book of the Graves County Eagles.">
+<!-- what a shared link shows (texts, Facebook, X): the eagle and the name -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Graves County Football Records">
+<meta property="og:title" content="Graves County Football Records">
+<meta property="og:description" content="Every Season. Every Game. Every Player.">
+<meta property="og:url" content="{{ site.github.url }}/">
+<meta property="og:image" content="{{ site.github.url }}/eagle.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Graves County Eagles">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Graves County Football Records">
+<meta name="twitter:description" content="Every Season. Every Game. Every Player.">
+<meta name="twitter:image" content="{{ site.github.url }}/eagle.png">
+<link rel="icon" type="image/png" href="eagle.png">
+<link rel="apple-touch-icon" href="eagle.png">
+<meta name="theme-color" content="#0d2b5e">
+<style>
+  html,body{margin:0;background:#f3f5f8;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#16202e}
+  .top{background:linear-gradient(135deg,#0d2b5e 0%,#163d7f 70%,#2a4f8f 100%);color:#fff;padding:22px 16px 26px;border-bottom:5px solid #8b939e}
+  .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px}
+  .top img{width:72px;height:72px;border-radius:14px;background:#fff;flex:none}
+  .k{letter-spacing:.18em;font-size:12px;color:#c9ced6;text-transform:uppercase}
+  .t{font-weight:800;font-size:clamp(22px,5vw,34px);text-transform:uppercase;letter-spacing:.02em;line-height:1.1;margin-top:3px}
+  .msg{text-align:center;color:#5b6575;padding:60px 16px}
+  .spin{width:34px;height:34px;border:4px solid #c9ced6;border-top-color:#0d2b5e;border-radius:50%;margin:0 auto 12px;animation:s 1s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><img src="eagle.png" alt=""><div><div class="k">Graves County High School · Eagles</div><div class="t">Coach Doc Oliver Football Record Book</div></div></div></div>
+<div class="msg" id="msg"><div class="spin"></div>Loading the record book…</div>
+<script>
+  // The record book itself lives in the Google Apps Script web app (it reads the Google Sheet).
+  // This page loads it from there, so it always shows the latest version. Nothing here needs changing.
+  window.DATA_URL = 'https://script.google.com/macros/s/AKfycbyiwVH6nnftYxqwH4HZnyybzKgxHhbVbblkYf3-F7tmEu0C69oxAFJ51BQ6RPt0DlOp/exec';
+  (function () {
+    var started = false;
+    window.boot = function (html) {
+      if (started) return; started = true;
+      document.open(); document.write(html); document.close();
+      var icon = document.createElement('link'); icon.rel = 'icon'; icon.type = 'image/png'; icon.href = 'eagle.png';
+      document.head.appendChild(icon);
+    };
+    var oops = function () {
+      if (started) return; started = true;
+      var m = document.getElementById('msg');
+      if (m) m.innerHTML = 'The record book couldn’t load right now. Please refresh the page in a minute.';
+    };
+    var s = document.createElement('script');
+    s.src = window.DATA_URL + '?page=1&callback=boot';
+    s.onerror = oops;
+    setTimeout(oops, 45000);
+    document.head.appendChild(s);
+  })();
+</script>
+</body>
+</html>
